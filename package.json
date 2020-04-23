@@ -41,7 +41,7 @@
     "ci": "run-s lint build",
     "compare-live": "node scripts/compare.js",
     "demos-web": "webpack-dev-server --config webpack-dev.config.js --port 2046 --openPage demos/index.html",
-    "analyze": "webpack --profile --json > dist/stats.json && webpack-bundle-analyzer ./dist/stats.json"
+    "storybook": "start-storybook -p 8080 -c .storybook"
   },
   "husky": {
     "hooks": {
@@ -79,7 +79,12 @@
     "nunjucks": "~3.2.0",
     "prettier": "^2.0.1",
     "puppeteer": "^3.0.0",
-    "react-i18next": "^11.0.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "@storybook/addon-actions": "^5.2.8",
+    "@storybook/addon-info": "^5.2.8",
+    "@storybook/addon-knobs": "^5.2.8",
+    "@storybook/react": "^5.2.8",
     "resemblejs": "^3.2.3",
     "rimraf": "^3.0.0",
     "ts-jest": "^25.4.0",

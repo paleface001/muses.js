@@ -3,11 +3,11 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    g2plot: './src/index.ts',
+    muses: './src/index.ts',
   },
   output: {
     filename: '[name].js',
-    library: 'g2plot',
+    library: 'muses',
     libraryTarget: 'umd',
     path: path.resolve(__dirname, 'dist/'),
   },

@@ -4,11 +4,11 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 module.exports = {
   entry: {
-    g2plot: './src/index.ts',
+    muses: './src/index.ts',
   },
   output: {
     filename: '[name].js',
-    library: 'G2Plot',
+    library: 'muses',
     libraryTarget: 'umd',
     path: resolve(__dirname, 'dist/'),
   },
