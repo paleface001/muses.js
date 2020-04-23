@@ -1,0 +1,125 @@
+{
+  "name": "muses",
+  "version": "0.0.1",
+  "description": "Open Source Visualization Storytelling Framework",
+  "keywords": [
+    "visualization",
+    "storytelling"
+  ],
+  "author": "paleface001",
+  "main": "lib/index.js",
+  "unpkg": "dist/muses.js",
+  "umd:main": "dist/muses.js",
+  "module": "esm/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib",
+    "esm",
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/paleface001/muses.js"
+  },
+  "scripts": {
+    "build": "run-s clean lib dist",
+    "clean": "rimraf lib esm dist",
+    "lib": "run-p lib:*",
+    "lib:cjs": "tsc -p tsconfig.json --target ES5 --module commonjs --outDir lib",
+    "lib:esm": "tsc -p tsconfig.json --target ES5 --module ESNext --outDir esm",
+    "dist": "webpack --config webpack.config.js --mode production",
+    "lint": "eslint --ext .ts --quiet ./src ./__tests__ ./demos",
+    "lint-fix": "run-s lint-fix:*",
+    "lint-fix:eslint": "eslint --ext .ts --fix ./src ./__tests__ ./demos",
+    "prettier": "prettier --write '**/*.{ts,js,css,json}'",
+    "lint-staged": "lint-staged",
+    "test": "jest",
+    "test-live": "DEBUG_MODE=1 jest --watch ./__tests__",
+    "ci": "run-s lint build",
+    "compare-live": "node scripts/compare.js",
+    "demos-web": "webpack-dev-server --config webpack-dev.config.js --port 2046 --openPage demos/index.html",
+    "analyze": "webpack --profile --json > dist/stats.json && webpack-bundle-analyzer ./dist/stats.json"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "dependencies": {
+    "@antv/g-base": "~0.4.0",
+    "@antv/g-canvas": "~0.4.0",
+    "@antv/g-svg": "~0.4.0",
+    "d3-scale": "~3.2.1",
+    "tslib": "^1.11.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-angular": "^8.2.0",
+    "@types/jest": "^25.2.1",
+    "@typescript-eslint/eslint-plugin": "^2.0.0",
+    "@typescript-eslint/parser": "^2.0.0",
+    "babel-loader": "^8.0.6",
+    "eslint": "^6.1.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-unicorn": "^18.0.1",
+    "event-simulate": "^1.0.0",
+    "husky": "^4.2.3",
+    "jest": "^24.9.0",
+    "jest-electron": "^0.1.7",
+    "jest-extended": "^0.11.2",
+    "lint-staged": "^10.0.7",
+    "npm-run-all": "^4.1.5",
+    "nunjucks": "~3.2.0",
+    "prettier": "^2.0.1",
+    "puppeteer": "^3.0.0",
+    "react-i18next": "^11.0.1",
+    "resemblejs": "^3.2.3",
+    "rimraf": "^3.0.0",
+    "ts-jest": "^25.4.0",
+    "ts-loader": "^7.0.0",
+    "typescript": "^3.5.3",
+    "webpack": "^4.39.2",
+    "webpack-bundle-analyzer": "^3.4.1",
+    "webpack-cli": "^3.3.7",
+    "webpack-dev-server": "^3.9.0"
+  },
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "diagnostics": {
+          "warnOnly": true
+        }
+      }
+    },
+    "runner": "jest-electron/runner",
+    "testEnvironment": "jest-electron/environment",
+    "setupFilesAfterEnv": [
+      "jest-extended"
+    ],
+    "preset": "ts-jest",
+    "collectCoverage": false,
+    "collectCoverageFrom": [
+      "src/**/*.{ts,js}",
+      "!**/node_modules/**",
+      "!**/vendor/**"
+    ],
+    "testRegex": "/__tests__/.*-spec\\.ts?$"
+  },
+  "lint-staged": {
+    "*.{js,css,json}": [
+      "prettier --write"
+    ],
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "license": "MIT"
+}
